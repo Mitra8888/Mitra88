@@ -1,0 +1,46 @@
+[
+  {
+    "name": "Zoki",
+    "password": "Zoranovic",
+    "year_of_birth": 2000,
+    "id": 1
+  },
+  {
+    "name": "uros",
+    "password": "uros0202",
+    "year_of_birth": 2000,
+    "id": 2
+  },
+  {
+    "name": "Marko",
+    "password": "Markovic",
+    "year_of_birth": 2000,
+    "id": 3
+  },
+  {
+    "name": "Uki",
+    "password": "uki123",
+    "id": 4
+  },
+  {
+    "name": "Miki",
+    "password": "mikicevic",
+    "id": 5
+  },
+  {
+    "name": "Uros",
+    "password": "jovanovic",
+    "id": 6
+  },
+  {
+    "name": "Uros",
+    "password": "jovanovic",
+    "id": 7
+  },
+  {
+    "name": "Marko",
+    "password": "jovanovic",
+    "year_of_birth": "1999",
+    "id": 8
+  }
+]

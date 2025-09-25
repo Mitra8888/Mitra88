@@ -1,0 +1,22 @@
+<div class="container mt-5">
+    <h1>Welcome Home!</h1>
+    <hr>
+
+    <div *ngIf="currentUser">
+        <h2>Profile Information:</h2>
+        <p><strong>Name:</strong> {{ currentUser.name }}</p>
+        <p *ngIf="currentUser.id"><strong>ID:</strong> {{ currentUser.id }}</p>
+        <p *ngIf="currentUser.year_of_birth"><strong>Year Of Birth:</strong> {{ currentUser.year_of_birth }}</p>
+        
+
+
+    </div>
+
+    <div *ngIf="!currentUser">
+        <p>User information not available. Please log in to view your profile.</p>
+        <button mat-raised-button color="primary" routerLink="/login">Go to Login</button>
+    </div>
+
+    <br>
+    <button mat-raised-button color="warn" (click)="logout()">Logout</button>
+</div>
