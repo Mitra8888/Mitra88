@@ -27,7 +27,7 @@ jobs:
         VERSION="1.${GITHUB_RUN_NUMBER}"
         echo "VERSION=$VERSION" >> $GITHUB_ENV
 
-        PROJECT_NAME="$(basename $PWD)"
+        PROJECT_NAME="mitra"
         echo "PROJECT_NAME=$PROJECT_NAME" >> $GITHUB_ENV
     
     - name: Build Docker image with docker compose
