@@ -27,9 +27,10 @@ jobs:
         PROJECT_NAME="mitra"
         echo "PROJECT_NAME=$PROJECT_NAME" >> $GITHUB_ENV
 
-    - name: Build Docker images with docker-compose
+    - name: Build Docker images with docker compose
       run: |
-        docker-compose -p "mitra" build
+        docker compose -p "$PROJECT_NAME" build
+
 
     - name: Retag and Push images
       run: |
