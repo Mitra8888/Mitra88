@@ -36,23 +36,25 @@ jobs:
 
     - name: Retag and Push images
       run: |
-        FRONTEND_LOCAL_IMAGE="${{ env.PROJECT_NAME}}_frontend"
-        FRONTEND_REPO="uros02/mitra88"
+        PROJECT_NAME="${{ env.PROJECT_NAME}}"
 
-        docker tag $FRONTEND_LOCAL_IMAGE $FRONTEND_REPO:latest
+        FRONTEND_REPO="uros02/mitra88-frontend"
+        FRONTEND_IMAGE_ID=$(docker images -q ${PROJECT_NAME}_frontend)
+
+        docker tag $FRONTEND_IMAGE_ID $FRONTEND_REPO:latest
         docker push $FRONTEND_REPO:latest
 
-        docker tag $FRONTEND_LOCAL_IMAGE $FRONTEND_REPO:${{ env.VERSION}}
-        docker push $FRONTEND_REPO:${{ env.VERSION }}
+        docker tag $FRONTEND_IMAGE_ID $FRONTEND_REPO:${{ env.VERSION}}
+        docker push $FRONTEND_REPO:${{env.VERSION}}
 
-        BACKEND_LOCAL_IMAGE="${{ env.PROJECT_NAME}}_backend"
         BACKEND_REPO="uros02/mitra88-backend"
+        BACKEND_IMAGE_ID=$(docker images -q ${PROJECT_NAME}_backend)
 
-        docker tag $BACKEND_LOCAL_IMAGE $BACKEND_REPO:latest
+        docker tag $BACKEND_IMAGE_ID $BACKEND_REPO:latest
         docker push $BACKEND_REPO:latest
 
-        docker tag $BACKEND_LOCAL_IMAGE $BACKEND_REPO:${{ env.VERSION }}
-        docker push $BACKEND_REPO:${{ env.VERSION}}
+        docker tag $BACKEND_IMAGE_ID $BACKEND_REPO:${{ env.VERSION}}
+        docker push $BACKEND_REPO:${{env.VERSION}}
 
           
 
