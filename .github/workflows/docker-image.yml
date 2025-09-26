@@ -29,7 +29,7 @@ jobs:
 
     - name: Build Docker images with docker-compose
       run: |
-        docker-compose -p "$PROJECT_NAME" build
+        docker-compose -p "mitra" build
 
     - name: Retag and Push images
       run: |
