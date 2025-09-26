@@ -26,18 +26,33 @@ jobs:
       run: |
         VERSION="1.${GITHUB_RUN_NUMBER}"
         echo "VERSION=$VERSION" >> $GITHUB_ENV
-    
-    - name: Build Docker image
-      run: |
-        docker build . \
-          --file Dockerfile \
-          --tag uros02/mitra88:latest \
-          --tag uros02/mitra88:${{ env.VERSION}}
 
-    - name: Push Docker image
+        PROJECT_NAME="$(basename $PWD)"
+        echo "PROJECT_NAME=$PROJECT_NAME" >> $GITHUB_ENV
+    
+    - name: Build Docker image with docker compose
       run: |
-        docker push uros02/mitra88:latest
-        docker push uros02/mitra88:${{ env.VERSION}}
+        docker compose -p ${{ env.PROJECT_NAME}} build
+
+    - name: Retag and Push images
+      run: |
+        FRONTEND_LOCAL_IMAGE="${{ env.PROJECT_NAME}}_frontend"
+        FRONTEND_REPO="uros02/mitra88"
+
+        docker tag $FRONTEND_LOCAL_IMAGE $FRONTEND_REPO:latest
+        docker push $FRONTEND_REPO:latest
+
+        docker tag $FRONTEND_LOCAL_IMAGE $FRONTEND_REPO:${{ env.VERSION}}
+        docker push $FRONTEND_REPO:${{ env.VERSION }}
+
+        BACKEND_LOCAL_IMAGE="${{ env.PROJECT_NAME}}_backend"
+        BACKEND_REPO="uros02/mitra88-backend"
+
+        docker tag $BACKEND_LOCAL_IMAGE $BACKEND_REPO:latest
+        docker push $BACKEND_REPO:latest
+
+        docker tag $BACKEND_LOCAL_IMAGE $BACKEND_REPO:${{ env.VERSION }}
+        docker push $BACKEND_REPO:${{ env.VERSION}}
 
           
 
