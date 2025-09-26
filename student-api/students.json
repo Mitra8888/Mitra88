@@ -42,5 +42,11 @@
     "password": "jovanovic",
     "year_of_birth": "1999",
     "id": 8
+  },
+  {
+    "name": "galaxytrip",
+    "password": "uros0202.123",
+    "year_of_birth": "2002",
+    "id": 9
   }
 ]
