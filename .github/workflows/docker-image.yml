@@ -35,7 +35,7 @@ jobs:
     - name: Retag and Push images
       run: |
         FRONTEND_REPO="uros02/mitra88-frontend"
-        FRONTEND_IMAGE_ID=$(docker images -q ${PROJECT_NAME}_frontend)
+        FRONTEND_IMAGE_ID=$(docker images -q ${PROJECT_NAME}-frontend)
 
         docker tag $FRONTEND_IMAGE_ID $FRONTEND_REPO:latest
         docker push $FRONTEND_REPO:latest
@@ -44,7 +44,7 @@ jobs:
         docker push $FRONTEND_REPO:$VERSION
 
         BACKEND_REPO="uros02/mitra88-backend"
-        BACKEND_IMAGE_ID=$(docker images -q ${PROJECT_NAME}_backend)
+        BACKEND_IMAGE_ID=$(docker images -q ${PROJECT_NAME}-backend)
 
         docker tag $BACKEND_IMAGE_ID $BACKEND_REPO:latest
         docker push $BACKEND_REPO:latest
