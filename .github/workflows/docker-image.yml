@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: CI with Cypress and Docker
 
 on:
   push:
@@ -7,7 +7,39 @@ on:
     branches: [ "main" ]
 
 jobs:
+  e2e-tests:
+    runs-on: ubuntu-latest
+
+
+    steps:
+      - uses: actions/checkout@v4
+
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 19-alpine
+
+      - name: Install All Dependencies
+        run: |
+          npm ci # Install frontend deps
+          cd student-api && npm ci # Install backend deps
+
+      - name: Start backend
+        run: cd student-api && npm start &
+
+      - name: Start frontend
+        run: npm start &
+
+      - name: Wait for servers
+        run: npx wait-on http-get://localhost:4200 http-get://localhost:1234 --timeout 60000
+
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v6
+        with:
+          spec: cypress/e2e/logintest.cy.ts
   build:
+    needs: e2e-tests
     runs-on: ubuntu-latest
 
     steps:
@@ -50,4 +82,10 @@ jobs:
         docker push $BACKEND_REPO:latest
 
         docker tag $BACKEND_IMAGE_ID $BACKEND_REPO:$VERSION
-        docker push $BACKEND_REPO:$VERSION
+        docker push $BACKEND_REPO:$VERSION 
+
+
+        
+
+      
+      
