@@ -31,6 +31,12 @@ jobs:
       - name: Start frontend (Port 4200)
         run: npm start &
 
+      - name: Wait for servers
+        run: 
+          echo "giving servers 10 seconds to initialize"
+          sleep 10
+          echo "Starting wait-on for localhost:4200 and localhost:1234..."
+          npx wait-on http-get://localhost:4200 http-get://localhost:1234 --timeout 60000
 
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6
