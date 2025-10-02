@@ -25,10 +25,10 @@ jobs:
           npm ci # Install frontend deps
           cd student-api && npm ci # Install backend deps
 
-      - name: Start backend
+      - name: Start backend (Port 1234)
         run: cd student-api && npm start &
 
-      - name: Start frontend
+      - name: Start frontend (Port 4200)
         run: npm start &
 
       - name: Wait for servers
